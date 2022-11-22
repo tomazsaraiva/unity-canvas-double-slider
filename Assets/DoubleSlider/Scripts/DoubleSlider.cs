@@ -1,26 +1,18 @@
-﻿//
-//  SliderDouble.cs
-//
-//  Author:
-//       Tomaz Saraiva <tomaz.saraiva@gmail.com>
-//
-//  Copyright (c) 2016 Tomaz Saraiva
-
-#region Includes
+﻿#region Includes
 using UnityEngine;
 using UnityEngine.Events;
 #endregion
 
-namespace TS.Examples.SliderDouble
+namespace TS.DoubleSlider
 {
     [RequireComponent(typeof(RectTransform))]
-    public class SliderDouble : MonoBehaviour
+    public class DoubleSlider : MonoBehaviour
     {
         #region Variables
 
         [Header("References")]
-        [SerializeField] private SliderSingle _sliderMin;
-        [SerializeField] private SliderSingle _sliderMax;
+        [SerializeField] private SingleSlider _sliderMin;
+        [SerializeField] private SingleSlider _sliderMax;
         [SerializeField] private RectTransform _fillArea;
 
         [Header("Configuration")]
@@ -33,14 +25,11 @@ namespace TS.Examples.SliderDouble
         [SerializeField] private float _initialMaxValue;
 
         [Header("Events")]
-        [SerializeField] UnityEvent<float, float> _onValueChanged;
+        public UnityEvent<float, float> OnValueChanged;
 
         public bool IsEnabled
         {
-            get
-            {
-                return _sliderMax.IsEnabled && _sliderMin.IsEnabled;
-            }
+            get { return _sliderMax.IsEnabled && _sliderMin.IsEnabled; }
             set
             {
                 _sliderMin.IsEnabled = value;
@@ -65,10 +54,6 @@ namespace TS.Examples.SliderDouble
                 _sliderMin.WholeNumbers = _wholeNumbers;
                 _sliderMax.WholeNumbers = _wholeNumbers;
             }
-        }
-        public UnityEvent<float, float> ValueChanged
-        {
-            get { return _onValueChanged; }
         }
 
         private RectTransform _fillRect;
@@ -113,8 +98,8 @@ namespace TS.Examples.SliderDouble
             _sliderMin.Setup(_initialMinValue, minValue, maxValue, MinValueChanged);
             _sliderMax.Setup(_initialMaxValue, minValue, maxValue, MaxValueChanged);
 
-            _sliderMin.Value = _initialMinValue;
-            _sliderMax.Value = _initialMaxValue;
+            MinValueChanged(_initialMinValue);
+            MaxValueChanged(_initialMaxValue);
         }
 
         private void MinValueChanged(float value)
@@ -128,7 +113,7 @@ namespace TS.Examples.SliderDouble
                 _sliderMin.Value = MaxValue - _minDistance;
             }
 
-            _onValueChanged.Invoke(MinValue, MaxValue);
+            OnValueChanged.Invoke(MinValue, MaxValue);
         }
         private void MaxValueChanged(float value)
         {
@@ -141,7 +126,7 @@ namespace TS.Examples.SliderDouble
                 _sliderMax.Value = MinValue + _minDistance;
             }
 
-            _onValueChanged.Invoke(MinValue, MaxValue);
+            OnValueChanged.Invoke(MinValue, MaxValue);
         }
     }
 }

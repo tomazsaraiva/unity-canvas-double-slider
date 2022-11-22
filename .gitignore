@@ -74,3 +74,4 @@ sysinfo.txt
 *.unitypackage
 
 # End of https://www.gitignore.io/api/macos,unity,monodevelop
+UserSettings/Layouts/default-2021.dwlt

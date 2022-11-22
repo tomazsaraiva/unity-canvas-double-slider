@@ -6,15 +6,15 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 #endregion
 
-namespace TS.Examples.SliderDouble
+namespace TS.DoubleSlider
 {
     [RequireComponent(typeof(Slider))]
-    public class SliderSingle : MonoBehaviour
+    public class SingleSlider : MonoBehaviour
     {
         #region Variables
 
         [Header("References")]
-        [SerializeField] private SliderLabel _label;
+        [SerializeField] private Label _label;
 
         private Slider _slider;
 
@@ -26,10 +26,7 @@ namespace TS.Examples.SliderDouble
         }
         public float Value
         {
-            get
-            {
-                return _slider.value;
-            }
+            get { return _slider.value; }
             set
             {
                 _slider.value = value;
@@ -48,9 +45,7 @@ namespace TS.Examples.SliderDouble
 
         private void Awake()
         {
-            _slider = GetComponent<Slider>();
-
-            if (_slider == null)
+            if (!TryGetComponent<Slider>(out _slider))
             {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.LogError("Missing Slider Component");
