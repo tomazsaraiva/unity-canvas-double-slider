@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 #endregion
 
-namespace TS.Examples.SliderDouble
+namespace TS.DoubleSlider
 {
-    public class SliderLabel : MonoBehaviour
+    public class Label : MonoBehaviour
     {
         #region Variables
 
@@ -21,9 +21,7 @@ namespace TS.Examples.SliderDouble
 
         private void Awake()
         {
-            _label = GetComponent<Text>();
-
-            if (_label == null)
+            if (!TryGetComponent<Text>(out _label))
             {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.LogError("Missing Text Component");

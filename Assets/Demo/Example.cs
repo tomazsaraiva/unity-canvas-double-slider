@@ -3,14 +3,14 @@ using System;
 using UnityEngine;
 #endregion
 
-namespace TS.Examples.SliderDouble
+namespace TS.DoubleSlider
 {
     public class Example : MonoBehaviour
     {
         #region Variables
 
         [Header("References")]
-        [SerializeField] private SliderDouble _slider;
+        [SerializeField] private DoubleSlider _slider;
 
         #endregion
 

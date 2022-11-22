@@ -1,26 +1,18 @@
-﻿//
-//  SliderDouble.cs
-//
-//  Author:
-//       Tomaz Saraiva <tomaz.saraiva@gmail.com>
-//
-//  Copyright (c) 2016 Tomaz Saraiva
-
-#region Includes
+﻿#region Includes
 using UnityEngine;
 using UnityEngine.Events;
 #endregion
 
-namespace TS.Examples.SliderDouble
+namespace TS.DoubleSlider
 {
     [RequireComponent(typeof(RectTransform))]
-    public class SliderDouble : MonoBehaviour
+    public class DoubleSlider : MonoBehaviour
     {
         #region Variables
 
         [Header("References")]
-        [SerializeField] private SliderSingle _sliderMin;
-        [SerializeField] private SliderSingle _sliderMax;
+        [SerializeField] private SingleSlider _sliderMin;
+        [SerializeField] private SingleSlider _sliderMax;
         [SerializeField] private RectTransform _fillArea;
 
         [Header("Configuration")]
@@ -37,10 +29,7 @@ namespace TS.Examples.SliderDouble
 
         public bool IsEnabled
         {
-            get
-            {
-                return _sliderMax.IsEnabled && _sliderMin.IsEnabled;
-            }
+            get { return _sliderMax.IsEnabled && _sliderMin.IsEnabled; }
             set
             {
                 _sliderMin.IsEnabled = value;
