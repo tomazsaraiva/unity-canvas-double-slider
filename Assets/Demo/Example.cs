@@ -1,5 +1,8 @@
 #region Includes
 using System;
+
+using TMPro;
+
 using UnityEngine;
 #endregion
 
@@ -11,18 +14,21 @@ namespace TS.DoubleSlider
 
         [Header("References")]
         [SerializeField] private DoubleSlider _slider;
+        [SerializeField] private TextMeshProUGUI _labelRange;
 
         #endregion
 
-        private void Start()
+        private void Awake()
         {
-            _slider.Setup(10, 50, 25, 40);
-            _slider.ValueChanged.AddListener(SliderDouble_ValueChanged);
+            // Call to setup slider with min, max and initial values.
+            //_slider.Setup(10, 50, 25, 40);
+
+            _slider.OnValueChanged.AddListener(SliderDouble_ValueChanged);
         }
 
-        private void SliderDouble_ValueChanged(float arg0, float arg1)
+        private void SliderDouble_ValueChanged(float min, float max)
         {
-            Debug.Log("Value Changed, min: " + arg0 + ", max: " + arg1);
+            _labelRange.text = string.Format("{0}-{1}", Mathf.RoundToInt(min), Mathf.RoundToInt(max));
         }
     }
 }

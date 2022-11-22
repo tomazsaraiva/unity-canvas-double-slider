@@ -25,7 +25,7 @@ namespace TS.DoubleSlider
         [SerializeField] private float _initialMaxValue;
 
         [Header("Events")]
-        [SerializeField] UnityEvent<float, float> _onValueChanged;
+        public UnityEvent<float, float> OnValueChanged;
 
         public bool IsEnabled
         {
@@ -54,10 +54,6 @@ namespace TS.DoubleSlider
                 _sliderMin.WholeNumbers = _wholeNumbers;
                 _sliderMax.WholeNumbers = _wholeNumbers;
             }
-        }
-        public UnityEvent<float, float> ValueChanged
-        {
-            get { return _onValueChanged; }
         }
 
         private RectTransform _fillRect;
@@ -102,8 +98,8 @@ namespace TS.DoubleSlider
             _sliderMin.Setup(_initialMinValue, minValue, maxValue, MinValueChanged);
             _sliderMax.Setup(_initialMaxValue, minValue, maxValue, MaxValueChanged);
 
-            _sliderMin.Value = _initialMinValue;
-            _sliderMax.Value = _initialMaxValue;
+            MinValueChanged(_initialMinValue);
+            MaxValueChanged(_initialMaxValue);
         }
 
         private void MinValueChanged(float value)
@@ -117,7 +113,7 @@ namespace TS.DoubleSlider
                 _sliderMin.Value = MaxValue - _minDistance;
             }
 
-            _onValueChanged.Invoke(MinValue, MaxValue);
+            OnValueChanged.Invoke(MinValue, MaxValue);
         }
         private void MaxValueChanged(float value)
         {
@@ -130,7 +126,7 @@ namespace TS.DoubleSlider
                 _sliderMax.Value = MinValue + _minDistance;
             }
 
-            _onValueChanged.Invoke(MinValue, MaxValue);
+            OnValueChanged.Invoke(MinValue, MaxValue);
         }
     }
 }
