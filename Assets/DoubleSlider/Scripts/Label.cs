@@ -1,6 +1,6 @@
 ﻿#region Includes
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 #endregion
 
 namespace TS.DoubleSlider
@@ -15,13 +15,13 @@ namespace TS.DoubleSlider
             set { _label.text = value; }
         }
 
-        private Text _label;
+        private TextMeshProUGUI _label;
 
         #endregion
 
         private void Awake()
         {
-            if (!TryGetComponent<Text>(out _label))
+            if (!TryGetComponent(out _label))
             {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 Debug.LogError("Missing Text Component");
