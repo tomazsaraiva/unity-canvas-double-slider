@@ -114,6 +114,7 @@ namespace TS.DoubleSlider
             }
 
             OnValueChanged.Invoke(MinValue, MaxValue);
+            _sliderMin.transform.SetAsLastSibling();
         }
         private void MaxValueChanged(float value)
         {
@@ -127,6 +128,7 @@ namespace TS.DoubleSlider
             }
 
             OnValueChanged.Invoke(MinValue, MaxValue);
+            _sliderMax.transform.SetAsLastSibling();
         }
     }
 }
