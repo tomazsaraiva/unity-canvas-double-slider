@@ -61,6 +61,8 @@ namespace TS.DoubleSlider
             _slider.value = value;
             _slider.onValueChanged.AddListener(Slider_OnValueChanged);
             _slider.onValueChanged.AddListener(valueChanged);
+
+            UpdateLabel();
         }
 
         private void Slider_OnValueChanged(float arg0)
